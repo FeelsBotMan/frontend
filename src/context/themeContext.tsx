@@ -1,10 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { getTheme, ThemeName } from "../style/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../style/global";
 
 const DEFAULT_THEME_NAME = "light" as ThemeName;
-const THEME_LOCAL_STORAGE_KEY = "book_store_theme";
+const THEME_LOCALSTORAGE_KEY = "book_store_theme";
 
 interface State {
   themeName: ThemeName;
@@ -27,8 +27,18 @@ export const BookStoreThemeProvider = ({
 
   const toggleTheme = () => {
     setThemeName(themeName === "light" ? "dark" : "light");
-    localStorage.setItem(THEME_LOCAL_STORAGE_KEY, themeName);
+    localStorage.setItem(
+      THEME_LOCALSTORAGE_KEY,
+      themeName === "light" ? "dark" : "light"
+    );
   };
+
+  useEffect(() => {
+    const savedThemeName = localStorage.getItem(
+      THEME_LOCALSTORAGE_KEY
+    ) as ThemeName;
+    setThemeName(savedThemeName || DEFAULT_THEME_NAME);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ themeName, toggleTheme }}>

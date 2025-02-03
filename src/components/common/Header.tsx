@@ -9,7 +9,11 @@ const HeaderStyled = styled.header`
 `;
 
 function Header() {
-  return <HeaderStyled>book store</HeaderStyled>;
+  return (
+    <HeaderStyled>
+      <h1>book store</h1>
+    </HeaderStyled>
+  );
 }
 
 export default Header;

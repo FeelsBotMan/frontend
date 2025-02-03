@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { state, ThemeContext } from "./context/themeContext";
+import { BookStoreThemeProvider } from "./context/themeContext";
 import React from "react";
 
 const root = ReactDOM.createRoot(
@@ -8,8 +8,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ThemeContext.Provider value={state}>
+    <BookStoreThemeProvider>
       <App />
-    </ThemeContext.Provider>
+    </BookStoreThemeProvider>
   </React.StrictMode>
 );

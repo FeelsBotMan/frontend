@@ -3,13 +3,14 @@ import "sanitize.css";
 import { ThemeName } from "./theme";
 
 interface Props {
-    themeName: ThemeName;
+  themeName: ThemeName;
 }
 
 export const GlobalStyle = createGlobalStyle<Props>`
   body {
     padding: 0;
     margin: 0;
+    background-color: ${({ theme }) => theme.color.background};
   }
   
   h1 {
