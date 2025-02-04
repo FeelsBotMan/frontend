@@ -1,9 +1,10 @@
-import { createContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createContext, ReactNode } from "react";
 import { getTheme, ThemeName } from "../style/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../style/global";
 
-const DEFAULT_THEME_NAME = "light" as ThemeName;
+const DEFAULT_THEME_NAME = "light";
 const THEME_LOCALSTORAGE_KEY = "book_store_theme";
 
 interface State {
@@ -12,7 +13,7 @@ interface State {
 }
 
 export const state = {
-  themeName: DEFAULT_THEME_NAME,
+  themeName: DEFAULT_THEME_NAME as ThemeName,
   toggleTheme: () => {},
 };
 
@@ -21,7 +22,7 @@ export const ThemeContext = createContext<State>(state);
 export const BookStoreThemeProvider = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const [themeName, setThemeName] = useState<ThemeName>(DEFAULT_THEME_NAME);
 
