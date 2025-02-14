@@ -2,28 +2,28 @@ import Title from "../components/common/Title";
 import styled from "styled-components";
 import InputText from "../components/common/InputText";
 import Button from "../components/common/Button";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { useForm } from "react-hook-form";
-import { signup } from "../api/auth.api";
-import { useAlert } from "../hooks/useAlert";
+import { useAuth } from "@/hooks/useAuth";
+import { ROUTES } from "@/constants/routes";
 export interface SignupProps {
   email: string;
   password: string;
 }
+
 function Signup() {
-  const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { userSignup } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignupProps>();
+
   const onSubmit = (data: SignupProps) => {
-    signup(data).then(() => {
-      showAlert("회원가입이 완료되었습니다.");
-      navigate("/login");
-    });
+    userSignup(data);
   };
+
   return (
     <>
       <Title size="large">회원가입</Title>
@@ -55,16 +55,18 @@ function Signup() {
             </Button>
           </fieldset>
           <div className="info">
-            <Link to="/reset">비밀번호 초기화</Link>
+            <Link to={ROUTES.RESET_PASSWORD}>비밀번호 초기화</Link>
           </div>
         </form>
       </SignupStyle>
     </>
   );
 }
-const SignupStyle = styled.div`
+
+export const SignupStyle = styled.div`
   max-width: ${({ theme }) => theme.layout.width.small};
   margin: 80px auto;
+
   fieldset {
     border: 0;
     padding: 0 0 8px 0;
@@ -72,16 +74,20 @@ const SignupStyle = styled.div`
       color: red;
     }
   }
+
   input {
     padding: 0.25rem 0.75rem;
     width: 100%;
   }
+
   button {
     width: 100%;
   }
+
   .info {
     text-align: center;
     padding: 16px 0 0 0;
   }
 `;
+
 export default Signup;

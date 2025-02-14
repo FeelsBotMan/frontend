@@ -1,8 +1,14 @@
 export type ThemeName = "light" | "dark";
-export type ColorKey = "primary" | "secondary" | "third" | "background" | "border" | "text";
+export type ColorKey =
+    | "primary"
+    | "secondary"
+    | "third"
+    | "background"
+    | "border"
+    | "text";
 export type HeadingSize = "large" | "medium" | "small";
 export type ButtonSize = "large" | "medium" | "small";
-export type ButtonScheme = "primary" | "normal";
+export type ButtonScheme = "primary" | "normal" | "like";
 export type LayoutWidth = "large" | "medium" | "small";
 
 interface Theme {
@@ -11,20 +17,19 @@ interface Theme {
     heading: {
         [key in HeadingSize]: {
             fontSize: string;
-        }
+        };
     };
     button: {
         [key in ButtonSize]: {
             fontSize: string;
             padding: string;
-        }
-
+        };
     };
     buttonScheme: {
         [key in ButtonScheme]: {
             color: string;
             backgroundColor: string;
-        }
+        };
     };
     borderRadius: {
         default: string;
@@ -34,10 +39,10 @@ interface Theme {
             [key in LayoutWidth]: string;
         };
     };
+    dropdown: {
+        color: string;
+    }
 }
-
-
-
 
 export const light: Theme = {
     name: "light",
@@ -83,6 +88,10 @@ export const light: Theme = {
             color: "black",
             backgroundColor: "lightgrey",
         },
+        like: {
+            color: "white",
+            backgroundColor: "coral",
+        },
     },
     borderRadius: {
         default: "4px",
@@ -94,6 +103,9 @@ export const light: Theme = {
             small: "320px",
         },
     },
+    dropdown: {
+        color: "white"
+    }
 };
 
 export const dark: Theme = {
@@ -105,28 +117,18 @@ export const dark: Theme = {
         third: "darkgreen",
         background: "midnightblue",
         border: "grey",
-        text: "white",
+        text: "#eee",
     },
-    buttonScheme: {
-        primary: {
-            color: "white",
-            backgroundColor: "coral",
-        },
-        normal: {
-            color: "white",
-            backgroundColor: "#555",
-        },
-    },
+    dropdown: {
+        color: "midnightblue"
+    }
 };
 
-export const getTheme = (themeName: ThemeName) => {
+export const getTheme = (themeName: ThemeName): Theme => {
     switch (themeName) {
         case "light":
             return light;
         case "dark":
             return dark;
-        default:
-            return light;
     }
 };
-
