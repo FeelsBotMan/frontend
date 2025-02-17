@@ -86,4 +86,10 @@ export const unlikeBook = http.delete(`${BASE_URL}${ROUTES.LIKE}/:bookId`, () =>
     return HttpResponse.json({ message: "좋아요 삭제됨" })
 });
 
+// 베스트 도서 조회
+export const bestBooks = http.get(`${BASE_URL}/books/best`, () => {
+    const mockBestBooks = generateMockBooks(5, 0); // 5개의 베스트 도서 생성
+    return HttpResponse.json(mockBestBooks); // 배열 직접 반환
+});
+
 

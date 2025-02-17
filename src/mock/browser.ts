@@ -1,9 +1,11 @@
 import { setupWorker } from "msw/browser";
-import { addReview, reviewsById } from "./review";
+import { addReview, reviewsById, reviewForMain } from "./review";
 import { categories } from "./category";
 import { books, bookGet, bookReviewsGet, likeBook, unlikeBook } from "./books";
 import { login, signup, resetPassword } from "./auth";
 import { cartGet, cartPost, cartDelete, orderPost, orderGet, orderGetById } from "./order";
+import { banners } from "./banner";
+import { bestBooks } from "./books";
 // import { delay, http } from "msw";
 
 // 백엔드 결합시 핸들러에서 제외하기
@@ -12,6 +14,7 @@ const handlers = [
     //     await delay(100);
     // }),  // https://h-owo-ld.tistory.com/350
     reviewsById,
+    reviewForMain,
     addReview,
     categories,
     books,
@@ -27,7 +30,9 @@ const handlers = [
     cartDelete,
     orderPost,
     orderGet,
-    orderGetById
+    orderGetById,
+    banners,
+    bestBooks,
 ];
 
 export const worker = setupWorker(...handlers);
